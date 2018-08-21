@@ -24,7 +24,7 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC" />
         <property name="username" value="root" />
-        <property name="password" value="ec51sh93" />
+        <property name="password" value="fatec" />
     </bean>
     
     <bean id="entityManagerFactory"
