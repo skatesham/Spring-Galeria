@@ -10,3 +10,11 @@ create table pap_papel(
 alter table usr_usuario add constraint foreign key (usr_id_papel) references pap_papel(pap_id);
 
 commit;
+
+insert into pap_papel(pap_descricao) values("Visitante");
+insert into pap_papel(pap_descricao) values("Usuario Comum");
+insert into pap_papel(pap_descricao) values("Administrador");
+
+#SELECT * FROM galeria.pap_papel;
+
+commit;

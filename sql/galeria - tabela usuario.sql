@@ -17,9 +17,15 @@ alter table usr_usuario add column usr_id_papel bigint(20) not null;
 
 commit;
 
-#delete from usr_usuario where usr_id = 1;
+insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "admin", "admin", "admin@admin.com", 3);
 
-#select * from usr_usuario;
+insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "123", "sham", "admin@admin.com", 2);
+
+insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "123", "lucas", "admin@admin.com", 2);
+
+commit;
+
+select count(usr_id) from usr_usuario;
 
 #select * from usr_usuario where usr_id = 105 or 1=1;
 
