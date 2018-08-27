@@ -1,0 +1,407 @@
+[1mdiff --git a/.classpath b/.classpath[m
+[1mindex 5a8e81c..9b136af 100644[m
+[1m--- a/.classpath[m
+[1m+++ b/.classpath[m
+[36m@@ -12,8 +12,12 @@[m
+ 			<attribute name="maven.pomderived" value="true"/>[m
+ 		</attributes>[m
+ 	</classpathentry>[m
+[31m-	<classpathentry kind="src" path="src/main/resources"/>[m
+[31m-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">[m
+[32m+[m	[32m<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">[m
+[32m+[m		[32m<attributes>[m
+[32m+[m			[32m<attribute name="maven.pomderived" value="true"/>[m
+[32m+[m		[32m</attributes>[m
+[32m+[m	[32m</classpathentry>[m
+[32m+[m	[32m<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">[m
+ 		<attributes>[m
+ 			<attribute name="maven.pomderived" value="true"/>[m
+ 		</attributes>[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 8b13789..ede4204 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1 +1,2 @@[m
+ [m
+[32m+[m[32m/target/[m
+[1mdiff --git a/.settings/org.eclipse.core.resources.prefs b/.settings/org.eclipse.core.resources.prefs[m
+[1mindex f9fe345..839d647 100644[m
+[1m--- a/.settings/org.eclipse.core.resources.prefs[m
+[1m+++ b/.settings/org.eclipse.core.resources.prefs[m
+[36m@@ -1,4 +1,5 @@[m
+ eclipse.preferences.version=1[m
+ encoding//src/main/java=UTF-8[m
+[32m+[m[32mencoding//src/main/resources=UTF-8[m
+ encoding//src/test/java=UTF-8[m
+ encoding/<project>=UTF-8[m
+[1mdiff --git a/.settings/org.eclipse.jdt.core.prefs b/.settings/org.eclipse.jdt.core.prefs[m
+[1mindex abec6ca..714351a 100644[m
+[1m--- a/.settings/org.eclipse.jdt.core.prefs[m
+[1m+++ b/.settings/org.eclipse.jdt.core.prefs[m
+[36m@@ -1,5 +1,5 @@[m
+ eclipse.preferences.version=1[m
+[31m-org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5[m
+[31m-org.eclipse.jdt.core.compiler.compliance=1.5[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.compliance=1.8[m
+ org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning[m
+[31m-org.eclipse.jdt.core.compiler.source=1.5[m
+[32m+[m[32morg.eclipse.jdt.core.compiler.source=1.8[m
+[1mdiff --git a/sql/galeria - tabela usuario.sql b/sql/galeria - tabela usuario.sql[m
+[1mindex 2282afc..61b3ee2 100644[m
+[1m--- a/sql/galeria - tabela usuario.sql[m	
+[1m+++ b/sql/galeria - tabela usuario.sql[m	
+[36m@@ -1,6 +1,8 @@[m
+[32m+[m[32mcreate database galeria;[m
+[32m+[m
+ use galeria;[m
+ [m
+[31m-drop table usuario;[m
+[32m+[m[32m#drop table usr_usuario;[m
+ [m
+ create table usr_usuario([m
+ 	usr_id bigint(20) primary key auto_increment,[m
+[1mdiff --git a/txt. b/txt.[m
+[1mdeleted file mode 100644[m
+[1mindex 4899db2..0000000[m
+[1m--- a/txt.[m
+[1m+++ /dev/null[m
+[36m@@ -1,338 +0,0 @@[m
+[31m-[1mdiff --git a/src/main/java/com/sham/fatec/galeria/App.java b/src/main/java/com/sham/fatec/galeria/App.java[m[m
+[31m-[1mindex 94fd2c9..c7cd7e7 100644[m[m
+[31m-[1m--- a/src/main/java/com/sham/fatec/galeria/App.java[m[m
+[31m-[1m+++ b/src/main/java/com/sham/fatec/galeria/App.java[m[m
+[31m-[36m@@ -6,6 +6,7 @@[m [mimport org.springframework.context.support.ClassPathXmlApplicationContext;[m[m
+[31m- [m[m
+[31m- import com.sham.fatec.galeria.model.Papel;[m[m
+[31m- import com.sham.fatec.galeria.model.Usuario;[m[m
+[31m-[32m+[m[32mimport com.sham.fatec.galeria.repository.ImagemRepository;[m[m
+[31m- import com.sham.fatec.galeria.repository.PapelRepository;[m[m
+[31m- import com.sham.fatec.galeria.repository.UsuarioRepository;[m[m
+[31m- [m[m
+[31m-[36m@@ -21,6 +22,7 @@[m [mpublic class App[m[m
+[31m-         [m[m
+[31m-         UsuarioRepository usuarioRepository = (UsuarioRepository) context.getBean("usuarioRepository");[m[m
+[31m-         PapelRepository papelRepository = (PapelRepository) context.getBean("papelRepository");[m[m
+[31m-[32m+[m[32m        ImagemRepository imagemRepository = (ImagemRepository) context.getBean("imagemRepository");[m[m
+[31m-         [m[m
+[31m-         Optional<Papel> papel = papelRepository.findById(1L);[m[m
+[31m-         Usuario usuario = (Usuario) context.getBean("usuario");[m[m
+[31m-[36m@@ -30,13 +32,18 @@[m [mpublic class App[m[m
+[31m-         usuario.setUsuario("sham");[m[m
+[31m-         usuario.setPapel(papel.get());[m[m
+[31m-         [m[m
+[31m-[32m+[m[41m        [m[m
+[31m-[32m+[m[41m        [m[m
+[31m-[32m+[m[41m        [m[m
+[31m-         //usuarioRepository.save(usuario);[m[m
+[31m-         //papelRepository.save();[m[m
+[31m-         //papelRepository.save(new Papel("Visitante"));[m[m
+[31m-         [m[m
+[31m-[31m-        Optional<Usuario> u = usuarioRepository.findByUsuario("sham");[m[m
+[31m-[32m+[m[32m        //Optional<Usuario> u = usuarioRepository.findByUsuario("sham");[m[m
+[31m-[32m+[m[41m        [m[m
+[31m-[32m+[m[32m        //System.out.println(u.get());[m[m
+[31m-[32m+[m[41m        [m[m
+[31m-         [m[m
+[31m-[31m-        System.out.println(u.get());[m[m
+[31m-         context.close();[m[m
+[31m-     }[m[m
+[31m- }[m[m
+[31m-[1mdiff --git a/src/main/java/com/sham/fatec/galeria/model/EnumPapel.java b/src/main/java/com/sham/fatec/galeria/model/EnumPapel.java[m[m
+[31m-[1mindex 5cce59f..1705b5b 100644[m[m
+[31m-[1m--- a/src/main/java/com/sham/fatec/galeria/model/EnumPapel.java[m[m
+[31m-[1m+++ b/src/main/java/com/sham/fatec/galeria/model/EnumPapel.java[m[m
+[31m-[36m@@ -22,6 +22,4 @@[m [mpublic enum EnumPapel {[m[m
+[31m- 	}[m[m
+[31m- 	[m[m
+[31m- 	[m[m
+[31m-[31m-	[m[m
+[31m-[31m-	[m[m
+[31m- }[m[m
+[31m-[1mdiff --git a/src/main/java/com/sham/fatec/galeria/model/Imagem.java b/src/main/java/com/sham/fatec/galeria/model/Imagem.java[m[m
+[31m-[1mindex 917a97b..d3b7ca7 100644[m[m
+[31m-[1m--- a/src/main/java/com/sham/fatec/galeria/model/Imagem.java[m[m
+[31m-[1m+++ b/src/main/java/com/sham/fatec/galeria/model/Imagem.java[m[m
+[31m-[36m@@ -7,7 +7,7 @@[m [mimport javax.persistence.GeneratedValue;[m[m
+[31m- import javax.persistence.GenerationType;[m[m
+[31m- import javax.persistence.Id;[m[m
+[31m- import javax.persistence.JoinColumn;[m[m
+[31m-[31m-import javax.persistence.OneToMany;[m[m
+[31m-[32m+[m[32mimport javax.persistence.ManyToOne;[m[m
+[31m- import javax.persistence.Table;[m[m
+[31m- [m[m
+[31m- @Entity[m[m
+[31m-[36m@@ -32,9 +32,9 @@[m [mpublic class Imagem {[m[m
+[31m- 	private byte[] imagemBlob;[m[m
+[31m- 	[m[m
+[31m- 	@Column(name = "ima_id_usuario")[m[m
+[31m-[31m-	@OneToMany(fetch = FetchType.LAZY)[m[m
+[31m-[32m+[m	[32m@ManyToOne(fetch = FetchType.LAZY)[m[m
+[31m- 	@JoinColumn(name = "usr_id")[m[m
+[31m-[31m-	private long idUsuario;[m[m
+[31m-[32m+[m	[32mprivate long idUsuario;[m[41m [m[m
+[31m- 	[m[m
+[31m- 	public Imagem() {[m[m
+[31m- 		super();[m[m
+[31m-[1mdiff --git a/src/main/java/com/sham/fatec/galeria/model/Usuario.java b/src/main/java/com/sham/fatec/galeria/model/Usuario.java[m[m
+[31m-[1mindex 7905880..e263eb3 100644[m[m
+[31m-[1m--- a/src/main/java/com/sham/fatec/galeria/model/Usuario.java[m[m
+[31m-[1m+++ b/src/main/java/com/sham/fatec/galeria/model/Usuario.java[m[m
+[31m-[36m@@ -1,5 +1,7 @@[m[m
+[31m- package com.sham.fatec.galeria.model;[m[m
+[31m- [m[m
+[31m-[32m+[m[32mimport java.util.Set;[m[m
+[31m-[32m+[m[m
+[31m- import javax.persistence.Column;[m[m
+[31m- import javax.persistence.Entity;[m[m
+[31m- import javax.persistence.FetchType;[m[m
+[31m-[36m@@ -7,6 +9,7 @@[m [mimport javax.persistence.GeneratedValue;[m[m
+[31m- import javax.persistence.GenerationType;[m[m
+[31m- import javax.persistence.Id;[m[m
+[31m- import javax.persistence.JoinColumn;[m[m
+[31m-[32m+[m[32mimport javax.persistence.OneToMany;[m[m
+[31m- import javax.persistence.OneToOne;[m[m
+[31m- import javax.persistence.Table;[m[m
+[31m- [m[m
+[31m-[36m@@ -31,10 +34,12 @@[m [mpublic class Usuario {[m[m
+[31m- 	@Column(name = "usr_email", unique = true, nullable = false, length = 50)[m[m
+[31m- 	private String email;[m[m
+[31m- 	[m[m
+[31m-[31m-	@OneToOne(fetch = FetchType.EAGER )[m[m
+[31m-[32m+[m	[32m@OneToOne(fetch = FetchType.EAGER)[m[m
+[31m- 	@JoinColumn(name = "usr_id_papel")[m[m
+[31m- 	private Papel papel;[m[m
+[31m- [m[m
+[31m-[32m+[m	[32m@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")[m[m
+[31m-[32m+[m	[32mprivate Set<Imagem> imagens;[m[m
+[31m- 	[m[m
+[31m- 	public Usuario() {[m[m
+[31m- 		super();[m[m
+[31m-[1mdiff --git a/src/main/resources/applicationContext.xml b/src/main/resources/applicationContext.xml[m[m
+[31m-[1mindex aba65b1..8ef1002 100644[m[m
+[31m-[1m--- a/src/main/resources/applicationContext.xml[m[m
+[31m-[1m+++ b/src/main/resources/applicationContext.xml[m[m
+[31m-[36m@@ -1,50 +1,59 @@[m[m
+[31m- <?xml version="1.0" encoding="UTF-8"?>[m[m
+[31m- <beans xmlns="http://www.springframework.org/schema/beans"[m[m
+[31m-[31m-    xmlns:p="http://www.springframework.org/schema/p"[m[m
+[31m-[31m-    xmlns:tx="http://www.springframework.org/schema/tx"[m[m
+[31m-[31m-    xmlns:jpa="http://www.springframework.org/schema/data/jpa"[m[m
+[31m-[31m-    xmlns:context="http://www.springframework.org/schema/context"[m[m
+[31m-[31m-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m[m
+[31m-[31m-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd[m[m
+[31m-[32m+[m	[32mxmlns:p="http://www.springframework.org/schema/p"[m[m
+[31m-[32m+[m	[32mxmlns:tx="http://www.springframework.org/schema/tx"[m[m
+[31m-[32m+[m	[32mxmlns:jpa="http://www.springframework.org/schema/data/jpa"[m[m
+[31m-[32m+[m	[32mxmlns:context="http://www.springframework.org/schema/context"[m[m
+[31m-[32m+[m	[32mxmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m[m
+[31m-[32m+[m	[32mxsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd[m[m
+[31m-         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd[m[m
+[31m-         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd[m[m
+[31m-         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">[m[m
+[31m-[31m-        [m[m
+[31m-[31m-    <bean id="usuario"[m[m
+[31m-[31m-    class="com.sham.fatec.galeria.model.Usuario" scope="prototype"/>[m[m
+[31m-[31m-        [m[m
+[31m-[31m-        [m[m
+[31m-[31m-    <context:component-scan base-package="com.sham.fatec.galeria"/>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <jpa:repositories base-package="com.sham.fatec.galeria.repository"/>[m[m
+[31m-[31m-[m[m
+[31m-[31m-    <!-- Datasource -->[m[m
+[31m-[31m-    <bean id="dataSource" [m[m
+[31m-[31m-         class="org.springframework.jdbc.datasource.DriverManagerDataSource">[m[m
+[31m-[31m-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />[m[m
+[31m-[31m-        <property name="url" value="jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC" />[m[m
+[31m-[31m-        <property name="username" value="root" />[m[m
+[31m-[31m-        <property name="password" value="fatec" />[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <bean id="entityManagerFactory"[m[m
+[31m-[31m-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"[m[m
+[31m-[31m-        p:packagesToScan="com.sham.fatec.galeria.model"[m[m
+[31m-[31m-        p:dataSource-ref="dataSource"[m[m
+[31m-[31m-        >[m[m
+[31m-[31m-        <property name="jpaVendorAdapter">[m[m
+[31m-[31m-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">[m[m
+[31m-[31m-                <property name="generateDdl" value="false" />[m[m
+[31m-[31m-                <property name="showSql" value="true" />[m[m
+[31m-[31m-                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>[m[m
+[31m-[31m-            </bean>[m[m
+[31m-[31m-        </property>[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <bean id="transactionManager"[m[m
+[31m-[31m-        class="org.springframework.orm.jpa.JpaTransactionManager">[m[m
+[31m-[31m-        <property name="entityManagerFactory" ref="entityManagerFactory" />[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    <tx:annotation-driven />[m[m
+[31m-[31m-    [m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="usuario" class="com.sham.fatec.galeria.model.Usuario"[m[m
+[31m-[32m+[m		[32mscope="prototype" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="imagem" class="com.sham.fatec.galeria.model.Imagem"[m[m
+[31m-[32m+[m		[32mscope="prototype" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<context:component-scan[m[m
+[31m-[32m+[m		[32mbase-package="com.sham.fatec.galeria" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<jpa:repositories[m[m
+[31m-[32m+[m		[32mbase-package="com.sham.fatec.galeria.repository" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<!-- Datasource -->[m[m
+[31m-[32m+[m	[32m<bean id="dataSource"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.jdbc.datasource.DriverManagerDataSource">[m[m
+[31m-[32m+[m		[32m<property name="driverClassName"[m[m
+[31m-[32m+[m			[32mvalue="com.mysql.cj.jdbc.Driver" />[m[m
+[31m-[32m+[m		[32m<property name="url"[m[m
+[31m-[32m+[m			[32mvalue="jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC" />[m[m
+[31m-[32m+[m		[32m<property name="username" value="root" />[m[m
+[31m-[32m+[m		[32m<property name="password" value="fatec" />[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="entityManagerFactory"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"[m[m
+[31m-[32m+[m		[32mp:packagesToScan="com.sham.fatec.galeria.model"[m[m
+[31m-[32m+[m		[32mp:dataSource-ref="dataSource">[m[m
+[31m-[32m+[m		[32m<property name="jpaVendorAdapter">[m[m
+[31m-[32m+[m			[32m<bean[m[m
+[31m-[32m+[m				[32mclass="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">[m[m
+[31m-[32m+[m				[32m<property name="generateDdl" value="false" />[m[m
+[31m-[32m+[m				[32m<property name="showSql" value="true" />[m[m
+[31m-[32m+[m				[32m<property name="databasePlatform"[m[m
+[31m-[32m+[m					[32mvalue="org.hibernate.dialect.MySQLDialect" />[m[m
+[31m-[32m+[m			[32m</bean>[m[m
+[31m-[32m+[m		[32m</property>[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="transactionManager"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.orm.jpa.JpaTransactionManager">[m[m
+[31m-[32m+[m		[32m<property name="entityManagerFactory"[m[m
+[31m-[32m+[m			[32mref="entityManagerFactory" />[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m	[32m<tx:annotation-driven />[m[m
+[31m-[32m+[m[m
+[31m- </beans>[m[m
+[31m-\ No newline at end of file[m[m
+[31m-[1mdiff --git a/target/classes/applicationContext.xml b/target/classes/applicationContext.xml[m[m
+[31m-[1mindex aba65b1..8ef1002 100644[m[m
+[31m-[1m--- a/target/classes/applicationContext.xml[m[m
+[31m-[1m+++ b/target/classes/applicationContext.xml[m[m
+[31m-[36m@@ -1,50 +1,59 @@[m[m
+[31m- <?xml version="1.0" encoding="UTF-8"?>[m[m
+[31m- <beans xmlns="http://www.springframework.org/schema/beans"[m[m
+[31m-[31m-    xmlns:p="http://www.springframework.org/schema/p"[m[m
+[31m-[31m-    xmlns:tx="http://www.springframework.org/schema/tx"[m[m
+[31m-[31m-    xmlns:jpa="http://www.springframework.org/schema/data/jpa"[m[m
+[31m-[31m-    xmlns:context="http://www.springframework.org/schema/context"[m[m
+[31m-[31m-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m[m
+[31m-[31m-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd[m[m
+[31m-[32m+[m	[32mxmlns:p="http://www.springframework.org/schema/p"[m[m
+[31m-[32m+[m	[32mxmlns:tx="http://www.springframework.org/schema/tx"[m[m
+[31m-[32m+[m	[32mxmlns:jpa="http://www.springframework.org/schema/data/jpa"[m[m
+[31m-[32m+[m	[32mxmlns:context="http://www.springframework.org/schema/context"[m[m
+[31m-[32m+[m	[32mxmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m[m
+[31m-[32m+[m	[32mxsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd[m[m
+[31m-         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd[m[m
+[31m-         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd[m[m
+[31m-         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">[m[m
+[31m-[31m-        [m[m
+[31m-[31m-    <bean id="usuario"[m[m
+[31m-[31m-    class="com.sham.fatec.galeria.model.Usuario" scope="prototype"/>[m[m
+[31m-[31m-        [m[m
+[31m-[31m-        [m[m
+[31m-[31m-    <context:component-scan base-package="com.sham.fatec.galeria"/>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <jpa:repositories base-package="com.sham.fatec.galeria.repository"/>[m[m
+[31m-[31m-[m[m
+[31m-[31m-    <!-- Datasource -->[m[m
+[31m-[31m-    <bean id="dataSource" [m[m
+[31m-[31m-         class="org.springframework.jdbc.datasource.DriverManagerDataSource">[m[m
+[31m-[31m-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />[m[m
+[31m-[31m-        <property name="url" value="jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC" />[m[m
+[31m-[31m-        <property name="username" value="root" />[m[m
+[31m-[31m-        <property name="password" value="fatec" />[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <bean id="entityManagerFactory"[m[m
+[31m-[31m-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"[m[m
+[31m-[31m-        p:packagesToScan="com.sham.fatec.galeria.model"[m[m
+[31m-[31m-        p:dataSource-ref="dataSource"[m[m
+[31m-[31m-        >[m[m
+[31m-[31m-        <property name="jpaVendorAdapter">[m[m
+[31m-[31m-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">[m[m
+[31m-[31m-                <property name="generateDdl" value="false" />[m[m
+[31m-[31m-                <property name="showSql" value="true" />[m[m
+[31m-[31m-                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>[m[m
+[31m-[31m-            </bean>[m[m
+[31m-[31m-        </property>[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    [m[m
+[31m-[31m-    <bean id="transactionManager"[m[m
+[31m-[31m-        class="org.springframework.orm.jpa.JpaTransactionManager">[m[m
+[31m-[31m-        <property name="entityManagerFactory" ref="entityManagerFactory" />[m[m
+[31m-[31m-    </bean>[m[m
+[31m-[31m-    <tx:annotation-driven />[m[m
+[31m-[31m-    [m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="usuario" class="com.sham.fatec.galeria.model.Usuario"[m[m
+[31m-[32m+[m		[32mscope="prototype" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="imagem" class="com.sham.fatec.galeria.model.Imagem"[m[m
+[31m-[32m+[m		[32mscope="prototype" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<context:component-scan[m[m
+[31m-[32m+[m		[32mbase-package="com.sham.fatec.galeria" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<jpa:repositories[m[m
+[31m-[32m+[m		[32mbase-package="com.sham.fatec.galeria.repository" />[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<!-- Datasource -->[m[m
+[31m-[32m+[m	[32m<bean id="dataSource"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.jdbc.datasource.DriverManagerDataSource">[m[m
+[31m-[32m+[m		[32m<property name="driverClassName"[m[m
+[31m-[32m+[m			[32mvalue="com.mysql.cj.jdbc.Driver" />[m[m
+[31m-[32m+[m		[32m<property name="url"[m[m
+[31m-[32m+[m			[32mvalue="jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC" />[m[m
+[31m-[32m+[m		[32m<property name="username" value="root" />[m[m
+[31m-[32m+[m		[32m<property name="password" value="fatec" />[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="entityManagerFactory"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"[m[m
+[31m-[32m+[m		[32mp:packagesToScan="com.sham.fatec.galeria.model"[m[m
+[31m-[32m+[m		[32mp:dataSource-ref="dataSource">[m[m
+[31m-[32m+[m		[32m<property name="jpaVendorAdapter">[m[m
+[31m-[32m+[m			[32m<bean[m[m
+[31m-[32m+[m				[32mclass="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">[m[m
+[31m-[32m+[m				[32m<property name="generateDdl" value="false" />[m[m
+[31m-[32m+[m				[32m<property name="showSql" value="true" />[m[m
+[31m-[32m+[m				[32m<property name="databasePlatform"[m[m
+[31m-[32m+[m					[32mvalue="org.hibernate.dialect.MySQLDialect" />[m[m
+[31m-[32m+[m			[32m</bean>[m[m
+[31m-[32m+[m		[32m</property>[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m[m
+[31m-[32m+[m	[32m<bean id="transactionManager"[m[m
+[31m-[32m+[m		[32mclass="org.springframework.orm.jpa.JpaTransactionManager">[m[m
+[31m-[32m+[m		[32m<property name="entityManagerFactory"[m[m
+[31m-[32m+[m			[32mref="entityManagerFactory" />[m[m
+[31m-[32m+[m	[32m</bean>[m[m
+[31m-[32m+[m	[32m<tx:annotation-driven />[m[m
+[31m-[32m+[m[m
+[31m- </beans>[m[m
+[31m-\ No newline at end of file[m[m
+[31m-[1mdiff --git a/target/classes/com/sham/fatec/galeria/App.class b/target/classes/com/sham/fatec/galeria/App.class[m[m
+[31m-[1mindex c710a8f..cce38d9 100644[m[m
+[31m-Binary files a/target/classes/com/sham/fatec/galeria/App.class and b/target/classes/com/sham/fatec/galeria/App.class differ[m
+[31m-[1mdiff --git a/target/classes/com/sham/fatec/galeria/model/Imagem.class b/target/classes/com/sham/fatec/galeria/model/Imagem.class[m[m
+[31m-[1mindex fb1e7aa..6fdef45 100644[m[m
+[31m-Binary files a/target/classes/com/sham/fatec/galeria/model/Imagem.class and b/target/classes/com/sham/fatec/galeria/model/Imagem.class differ[m
+[31m-[1mdiff --git a/target/classes/com/sham/fatec/galeria/model/Usuario.class b/target/classes/com/sham/fatec/galeria/model/Usuario.class[m[m
+[31m-[1mindex a55ec58..230e6d8 100644[m[m
+[31m-Binary files a/target/classes/com/sham/fatec/galeria/model/Usuario.class and b/target/classes/com/sham/fatec/galeria/model/Usuario.class differ[m
