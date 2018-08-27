@@ -1,5 +1,7 @@
 package com.sham.fatec.galeria.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,10 +34,12 @@ public class Usuario {
 	@Column(name = "usr_email", unique = true, nullable = false, length = 50)
 	private String email;
 	
-	@OneToOne(fetch = FetchType.EAGER )
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usr_id_papel")
 	private Papel papel;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	private Set<Imagem> imagens;
 	
 	public Usuario() {
 		super();

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,10 +31,9 @@ public class Imagem {
 	@Column (name = "ima_imagem")
 	private byte[] imagemBlob;
 	
-	@Column(name = "ima_id_usuario")
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usr_id")
-	private long idUsuario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ima_id_usuario")
+	private Usuario usuario;
 	
 	public Imagem() {
 		super();
@@ -79,7 +78,14 @@ public class Imagem {
 	public void setImagemBlob(byte[] imagemBlob) {
 		this.imagemBlob = imagemBlob;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 
 }
