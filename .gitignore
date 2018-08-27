@@ -1,0 +1,4 @@
+# SQL source #
+
+sql/*.sql
+*.sql
