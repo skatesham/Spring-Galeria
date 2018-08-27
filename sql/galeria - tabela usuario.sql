@@ -1,8 +1,9 @@
+
 create database galeria;
 
 use galeria;
 
-#drop table usr_usuario;
+drop table usr_galeria;
 
 create table usr_usuario(
 	usr_id bigint(20) primary key auto_increment,

@@ -1,3 +1,6 @@
+use galeria;
+
+drop table ima_imagem;
 
 create table ima_imagem(
 	ima_id bigint(20) primary key,
