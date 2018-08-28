@@ -19,9 +19,9 @@ commit;
 
 insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "admin", "admin", "admin@admin.com", 3);
 
-insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "123", "sham", "admin@admin.com", 2);
+insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Sham Vinicius", "123", "sham", "sham@admin.com", 2);
 
-insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Administrador", "123", "lucas", "admin@admin.com", 2);
+insert into usr_usuario(usr_nome, usr_senha, usr_usuario, usr_email, usr_id_papel) values("Lucao", "123", "lucas", "lucas@admin.com", 2);
 
 commit;
 

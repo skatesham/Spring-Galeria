@@ -11,12 +11,14 @@ import javax.imageio.ImageIO;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.sham.fatec.galeria.model.EnumPapel;
 import com.sham.fatec.galeria.model.Imagem;
 import com.sham.fatec.galeria.model.Papel;
 import com.sham.fatec.galeria.model.Usuario;
 import com.sham.fatec.galeria.repository.ImagemRepository;
 import com.sham.fatec.galeria.repository.PapelRepository;
 import com.sham.fatec.galeria.repository.UsuarioRepository;
+import com.sham.fatec.galeria.service.UsuarioService;
 
 /**
  * Hello world!
@@ -28,24 +30,31 @@ public class App
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         
-        UsuarioRepository usuarioRepository = (UsuarioRepository) context.getBean("usuarioRepository");
         PapelRepository papelRepository = (PapelRepository) context.getBean("papelRepository");
         ImagemRepository imagemRepository = (ImagemRepository) context.getBean("imagemRepository");
         
-        Optional<Usuario> u = usuarioRepository.findByUsuario("sham");
+        UsuarioService usuarioService = (UsuarioService) context.getBean("usuarioService");
+        
+        //Optional<Usuario> usuario = usuarioService.lerUsuarioByNomeUsuario("lucas");
+        
+
+
+        
+        
         
         //Set<Imagem> imagens = imagemRepository.findByUsuario(u.get());
         //System.out.println(imagens.size());
         
-        /*Optional<Papel> papel = papelRepository.findById(1L);
+        //Optional<Papel> papel = papelRepository.findById(1L);
         Usuario usuario = (Usuario) context.getBean("usuario");
-        usuario.setNome("Sham Vinicius Fiorin");
+        usuario.setNome("Mineda");
         usuario.setSenha("123");
-        usuario.setEmail("sham.vinicius@gmail.com");
-        usuario.setUsuario("sham");
-        usuario.setPapel(papel.get());
-        */
+        usuario.setEmail("mineda@fatec.sp.gov.br");
+        usuario.setUsuario("mineda");
         
+        //usuario = usuarioService.incluirUsuario(usuario, EnumPapel.VISITANTE);
+        
+        //System.out.println(usuario.getEmail());
         /*
         
         Imagem imagem = (Imagem) context.getBean("imagem");
