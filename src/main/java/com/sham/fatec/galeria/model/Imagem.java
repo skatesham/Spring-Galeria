@@ -86,6 +86,13 @@ public class Imagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	@Override
+	public String toString() {
+		String str = String.format("Nome: %s, Tipo: %s", nome, tipo);
+		return str; 
+	}
+	
 	
 
 }

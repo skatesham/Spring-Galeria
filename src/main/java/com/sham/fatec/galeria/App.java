@@ -35,10 +35,13 @@ public class App
         
         UsuarioService usuarioService = (UsuarioService) context.getBean("usuarioService");
         
-        //Optional<Usuario> usuario = usuarioService.lerUsuarioByNomeUsuario("lucas");
+        Optional<Usuario> u = usuarioService.lerUsuarioByNomeUsuario("lucas");
         
+        Set<Imagem> img = imagemRepository.findByUsuario(u.get());
 
-
+        for(Imagem i : img) {
+        	System.out.println(i);
+        }
         
         
         
@@ -55,8 +58,8 @@ public class App
         //usuario = usuarioService.incluirUsuario(usuario, EnumPapel.VISITANTE);
         
         //System.out.println(usuario.getEmail());
+    
         /*
-        
         Imagem imagem = (Imagem) context.getBean("imagem");
         imagem.setNome("Imagem 1");
         imagem.setUsuario(u.get());
@@ -78,8 +81,8 @@ public class App
 		}
         
        imagemRepository.save(imagem);
-       
        */
+  
         //usuarioRepository.save(usuario);
         //papelRepository.save();
         //papelRepository.save(new Papel("Visitante"));
