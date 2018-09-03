@@ -10,18 +10,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pap_papel")
 public class Papel {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pap_id")
 	private long id;
 
 	@Column(name = "pap_descricao")
 	private String descricao;
-	
+
 	public Papel() {
 	}
-	
+
 	public Papel(String descricao) {
 		this.descricao = descricao;
 	}
@@ -41,7 +41,5 @@ public class Papel {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-	
+
 }

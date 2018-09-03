@@ -1,5 +1,9 @@
 package com.sham.fatec.galeria.model;
 
+/**
+ * @author Sham
+ */
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,28 +17,28 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ima_imagem")
 public class Imagem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name = "ima_id")
+	@Column(name = "ima_id")
 	private long id;
-	
+
 	@Column(name = "ima_nome")
 	private String nome;
-	
+
 	@Column(name = "ima_tamanho")
 	private String tamanho;
-	
+
 	@Column(name = "ima_tipo")
 	private String tipo;
-	
-	@Column (name = "ima_imagem")
+
+	@Column(name = "ima_imagem")
 	private byte[] imagemBlob;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ima_id_usuario")
 	private Usuario usuario;
-	
+
 	public Imagem() {
 		super();
 	}
@@ -86,6 +90,11 @@ public class Imagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	@Override
+	public String toString() {
+		String str = String.format("Nome: %s, Tipo: %s", nome, tipo);
+		return str;
+	}
 
 }
