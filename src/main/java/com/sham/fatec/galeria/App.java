@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.sham.fatec.galeria.model.EnumPapel;
@@ -21,77 +22,71 @@ import com.sham.fatec.galeria.repository.UsuarioRepository;
 import com.sham.fatec.galeria.service.UsuarioService;
 
 /**
- * Hello world!
+ * Sistema de Galerias de Imagens Pessoais
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        
-        PapelRepository papelRepository = (PapelRepository) context.getBean("papelRepository");
-        ImagemRepository imagemRepository = (ImagemRepository) context.getBean("imagemRepository");
-        
-        UsuarioService usuarioService = (UsuarioService) context.getBean("usuarioService");
-        
-        Optional<Usuario> u = usuarioService.lerUsuarioByNomeUsuario("lucas");
-        
-        Set<Imagem> img = imagemRepository.findByUsuario(u.get());
+public class App {
+	public static void main(String[] args) {
+		
+		//Contexto XML
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		// Contexto Java Based Configuration !! ERROR !!
+		// AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DIConfig.class);
 
-        for(Imagem i : img) {
-        	System.out.println(i);
-        }
-        
-        
-        
-        //Set<Imagem> imagens = imagemRepository.findByUsuario(u.get());
-        //System.out.println(imagens.size());
-        
-        //Optional<Papel> papel = papelRepository.findById(1L);
-        Usuario usuario = (Usuario) context.getBean("usuario");
-        usuario.setNome("Mineda");
-        usuario.setSenha("123");
-        usuario.setEmail("mineda@fatec.sp.gov.br");
-        usuario.setUsuario("mineda");
-        
-        //usuario = usuarioService.incluirUsuario(usuario, EnumPapel.VISITANTE);
-        
-        //System.out.println(usuario.getEmail());
-    
-        /*
-        Imagem imagem = (Imagem) context.getBean("imagem");
-        imagem.setNome("Imagem 1");
-        imagem.setUsuario(u.get());
+		// Beans Repository
+		PapelRepository papelRepository = (PapelRepository) context.getBean("papelRepository");
+		ImagemRepository imagemRepository = (ImagemRepository) context.getBean("imagemRepository");
+		UsuarioService usuarioService = (UsuarioService) context.getBean("usuarioService");
 
-        byte[] imagemBlob;
-        
-        try {
-        	File file = new File("img/img.png");
-        	BufferedImage img = ImageIO.read(file);
-            imagem.setTamanho(img.getWidth()+"x"+img.getHeight());
-            imagem.setTipo(file.getName().substring(file.getName().indexOf("."), file.getName().length()));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(img, "png", baos);
-            imagemBlob = baos.toByteArray();
-            imagem.setImagemBlob(imagemBlob);
-            
-        } catch (Exception e) {
-			e.printStackTrace();
-		}
-        
-       imagemRepository.save(imagem);
-       */
-  
-        //usuarioRepository.save(usuario);
-        //papelRepository.save();
-        //papelRepository.save(new Papel("Visitante"));
-        
-        
-        
-        //System.out.println(u.get());
-        
-        
-        context.close();
-    }
+		
+		// Teste Serviço, Ler Usuario
+		Optional<Usuario> u = usuarioService.lerUsuarioByNomeUsuario("lucas");
+
+		// Teste - Ler Galeria Imagem
+		Set<Imagem> img = imagemRepository.findByUsuario(u.get());
+		for(Imagem i : img) { System.out.println(i); }
+
+		// Set<Imagem> imagens = imagemRepository.findByUsuario(u.get());
+		// System.out.println(imagens.size());
+
+		// Optional<Papel> papel = papelRepository.findById(1L);
+		/*
+		 Usuario usuario = (Usuario) context.getBean("usuario");
+		 usuario.setNome("Mineda"); usuario.setSenha("123");
+		 usuario.setEmail("mineda@fatec.sp.gov.br"); usuario.setUsuario("mineda");
+		 */
+		// usuario = usuarioService.incluirUsuario(usuario, EnumPapel.VISITANTE);
+
+		// System.out.println(usuario.getEmail());
+
+		 Imagem imagem = (Imagem) context.getBean("imagem");
+		 System.out.println(imagem);
+
+		/*
+		 Imagem imagem = (Imagem) context.getBean("imagem");
+		 imagem.setNome("Imagem 1"); imagem.setUsuario(u.get());
+		 
+		 byte[] imagemBlob;
+		 
+		 try { File file = new File("img/img.png"); BufferedImage img =
+		 ImageIO.read(file); imagem.setTamanho(img.getWidth()+"x"+img.getHeight());
+		 imagem.setTipo(file.getName().substring(file.getName().indexOf("."),
+		 file.getName().length())); ByteArrayOutputStream baos = new
+		 ByteArrayOutputStream(); ImageIO.write(img, "png", baos); imagemBlob =
+		 baos.toByteArray(); imagem.setImagemBlob(imagemBlob);
+		 
+		 } catch (Exception e) { e.printStackTrace(); }
+		 
+		 imagemRepository.save(imagem);
+		 */
+
+		// usuarioRepository.save(usuario);
+		// papelRepository.save();
+		// papelRepository.save(new Papel("Visitante"));
+
+		// System.out.println(u.get());
+
+		context.close();
+	}
 }

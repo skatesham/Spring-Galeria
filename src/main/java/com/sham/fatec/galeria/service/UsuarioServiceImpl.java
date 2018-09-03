@@ -14,23 +14,23 @@ import com.sham.fatec.galeria.repository.UsuarioRepository;
 
 @Service("usuarioService")
 public class UsuarioServiceImpl implements UsuarioService {
-	
+
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	PapelRepository papelRepository;
-	
+
 	@Override
 	@Transactional
 	public Usuario incluirUsuario(Usuario usuario, EnumPapel papel) {
-		
+
 		Optional<Papel> p = papelRepository.findByDescricao(papel.getDescricao());
-		
-		if(p.isPresent()) {
+
+		if (p.isPresent()) {
 			usuario.setPapel(p.get());
 		}
-		
+
 		return usuarioRepository.save(usuario);
 	}
 

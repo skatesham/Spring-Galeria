@@ -21,26 +21,26 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "usr_id")
 	private long id;
-	
+
 	@Column(name = "usr_nome", length = 50, nullable = false)
 	private String nome;
 
 	@Column(name = "usr_senha", length = 250, nullable = false)
 	private String senha;
-	
+
 	@Column(name = "usr_usuario", unique = true, nullable = false, length = 25)
 	private String usuario;
-	
+
 	@Column(name = "usr_email", unique = true, nullable = false, length = 50)
 	private String email;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usr_id_papel")
 	private Papel papel;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	private Set<Imagem> imagens;
-	
+
 	public Usuario() {
 		super();
 	}
@@ -92,7 +92,13 @@ public class Usuario {
 	public void setPapel(Papel papel) {
 		this.papel = papel;
 	}
+
+	@Override
+	public String toString() {
+		String str = String.format("Usuario: %d, Nome: %s, Email: %s", id, nome, email);
+		return str;
+	}
 	
 	
-	
+
 }
