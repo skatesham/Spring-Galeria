@@ -42,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	@Transactional
-	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
+	public Optional<Usuario> atualizarUsuario(Usuario usuario, Usuario atualizacao) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -56,6 +56,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        
+	    <!-- teste -->
+	    <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-test</artifactId>
+	      <version>${org.springframework.version}</version>
+	    </dependency>        
 
         <dependency>
             <groupId>junit</groupId>

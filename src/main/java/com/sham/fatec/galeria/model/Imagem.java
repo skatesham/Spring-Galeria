@@ -1,5 +1,11 @@
 package com.sham.fatec.galeria.model;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
 /**
  * @author Sham
  */
@@ -38,11 +44,15 @@ public class Imagem {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ima_id_usuario")
 	private Usuario usuario;
-
+	
 	public Imagem() {
 		super();
 	}
 
+	public Imagem(String path) {
+		extrairBlob(path);
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -91,6 +101,20 @@ public class Imagem {
 		this.usuario = usuario;
 	}
 
+	public void extrairBlob(String path) {
+		 try { 
+			 File file = new File(path); 
+			 BufferedImage img = ImageIO.read(file);
+			 this.setTamanho(img.getWidth()+"x"+img.getHeight());
+			 this.setTipo(file.getName().substring(file.getName().indexOf("."), file.getName().length()));
+			 ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+			 ImageIO.write(img, this.tipo, baos);
+			 imagemBlob = baos.toByteArray(); 
+			 this.setImagemBlob(imagemBlob);
+		 
+		 } catch (Exception e) { e.printStackTrace(); }
+	}
+	
 	@Override
 	public String toString() {
 		String str = String.format("Nome: %s, Tipo: %s", nome, tipo);

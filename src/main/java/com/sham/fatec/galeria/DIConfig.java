@@ -31,15 +31,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(value = { "com.sham.fatec.galeria" })
 public class DIConfig {
 
+	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/galeria?useTimezone=true&amp;serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/galeria?useTimezone=true&serverTimezone=UTC");
 		dataSource.setUsername("root");
 		dataSource.setPassword("fatec");
 		return dataSource;
 	}
 
+	@Bean
 	public EntityManagerFactory entityManagerFactory() {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
@@ -54,7 +56,8 @@ public class DIConfig {
 
 		return factory.getObject();
 	}
-
+	
+	@Bean
 	public PlatformTransactionManager transactionManager() {
 
 		JpaTransactionManager txManager = new JpaTransactionManager();
@@ -67,8 +70,6 @@ public class DIConfig {
 	@Scope("prototype")
 	public Imagem imagem() {
 		Imagem imagem = new Imagem();
-		imagem.setNome("Imagem Protótipo");
-		imagem.setTipo("Protótipo");
 		return imagem;
 	}
 
