@@ -11,6 +11,6 @@ public interface UsuarioService {
 
 	public Optional<Usuario> lerUsuarioByNomeUsuario(String nomeUsuario);
 
-	public Optional<Usuario> atualizarUsuario(Usuario usuario);
+	public Optional<Usuario> atualizarUsuario(Usuario usuario, Usuario atualizacao);
 
 }

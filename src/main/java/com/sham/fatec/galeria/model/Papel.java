@@ -22,8 +22,8 @@ public class Papel {
 	public Papel() {
 	}
 
-	public Papel(String descricao) {
-		this.descricao = descricao;
+	public Papel(EnumPapel descricao) {
+		this.descricao = descricao.getDescricao();
 	}
 
 	public long getId() {
