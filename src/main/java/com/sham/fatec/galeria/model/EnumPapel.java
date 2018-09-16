@@ -2,7 +2,7 @@ package com.sham.fatec.galeria.model;
 
 public enum EnumPapel {
 
-	VISITANTE("Visitante"), USUARIO_COMUM("Usuario Comum"), ADMINISTRADOR("Administrador");
+	VISITANTE("Visitante"), USUARIO_COMUM("Usuario Comum"), ADMINISTRADOR("Administrador"), TESTE("teste");
 
 	private String descricao;
 
