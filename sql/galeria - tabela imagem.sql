@@ -13,3 +13,4 @@ create table ima_imagem(
     
 alter table ima_imagem add constraint foreign key (ima_id_usuario) references usr_usuario(usr_id);
 
+select * from ima_imagem;

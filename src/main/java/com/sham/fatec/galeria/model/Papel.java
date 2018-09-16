@@ -16,7 +16,7 @@ public class Papel {
 	@Column(name = "pap_id")
 	private long id;
 
-	@Column(name = "pap_descricao")
+	@Column(name = "pap_descricao", unique = true, length = 50, nullable = false)
 	private String descricao;
 
 	public Papel() {
@@ -41,5 +41,13 @@ public class Papel {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public String toString() {
+		String str = String.format("Objeto Papel - ID: %d / Desc: %s", id, descricao);
+		return str;
+	}
+	
+	
 
 }

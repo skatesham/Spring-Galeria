@@ -1,13 +1,15 @@
 package com.sham.fatec.galeria;
 
-import java.util.Optional;
+import java.util.Iterator;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.sham.fatec.galeria.model.EnumPapel;
+import com.sham.fatec.galeria.model.Imagem;
+import com.sham.fatec.galeria.model.Papel;
 import com.sham.fatec.galeria.model.Usuario;
-import com.sham.fatec.galeria.repository.ImagemRepository;
-import com.sham.fatec.galeria.repository.PapelRepository;
+import com.sham.fatec.galeria.service.ImagemService;
+import com.sham.fatec.galeria.service.PapelService;
 import com.sham.fatec.galeria.service.UsuarioService;
 
 /**
@@ -16,54 +18,53 @@ import com.sham.fatec.galeria.service.UsuarioService;
  */
 public class App {
 	public static void main(String[] args) {
-
-		// Contexto XML
-		// ClassPathXmlApplicationContext context = new
+		
+		// Context XML
 		// ClassPathXmlApplicationContext("applicationContext.xml");
 
-		// Contexto Java Based Configuration !! ERROR !!
+		// Context Java Based Configuration !!
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DIConfig.class);
 
-		// Beans Repository
-		PapelRepository papelRepository = (PapelRepository) context.getBean("papelRepository");
-		ImagemRepository imagemRepository = (ImagemRepository) context.getBean("imagemRepository");
+		// Serviços do sistema
+		PapelService papelService = (PapelService) context.getBean("papelService");
 		UsuarioService usuarioService = (UsuarioService) context.getBean("usuarioService");
+		ImagemService imagemService = (ImagemService) context.getBean("imagemService");
+
+		// Lendo papel By descrição
+		Papel papel = papelService.lerPapelByDescricao(EnumPapel.VISITANTE).get();
 		
-		//Teste Serviço inserir Usuario
-		Usuario usuario = (Usuario) context.getBean("usuario");
-		usuario.setNome("Minedao");
-		usuario.setSenha("123");
-		usuario.setEmail("minedao@fatec.sp.gov.br");
-		usuario.setUsuario("minedao");
-		usuario = usuarioService.incluirUsuario(usuario, EnumPapel.VISITANTE);
-		System.out.println(usuario.getEmail());
-
-		// Teste Serviço, Ler Usuario
-		Optional<Usuario> u = usuarioService.lerUsuarioByNomeUsuario("lucas");
-
+		// Iniciando beans
+		Usuario usuarioBean = (Usuario) context.getBean("usuario");
+		Imagem imagemBean = (Imagem) context.getBean("imagem");
+		
+		// Incluir usuario com enum papel
+		
 		/*
-		 * String path = "img/img.png"; Imagem imagem = new Imagem(path);
-		 * imagem.setNome("Imagem 2"); imagem.setUsuario(u.get());
-		 * //imagem.extrairBlob(path); imagemRepository.save(imagem);
-		 */
-
+			??? Por que servico lança exception (duplicado)???
+		*/
+		//usuarioBean = usuarioService.incluirUsuario(usuarioBean, EnumPapel.VISITANTE);
+		
+		// Ler usuario by nome usuario
+		usuarioBean = usuarioService.lerUsuarioByNomeUsuario(usuarioBean.getUsuario()).get();
+		
+		// Set usuario a Imagem
+		imagemBean.setUsuario(usuarioBean);
+		
+		// Incluir imagem para usuarioBean
+		imagemService.incluirImage(imagemBean);
+		
+		// ler imagens by usuario
+		Iterator<Imagem> imagensIterator = imagemService.lerImagensByUsuario(usuarioBean).iterator();
+		
+		System.out.println("Demonstração:");
+		System.out.println(papel);
+		System.out.println(usuarioBean);
+		
 		/*
-		 * Teste - Ler Galeria Imagem Set<Imagem> img =
-		 * imagemRepository.findByUsuario(u.get()); for(Imagem i : img) {
-		 * System.out.println(i); }
-		 */
-
-		// Set<Imagem> imagens = imagemRepository.findByUsuario(u.get());
-		// System.out.println(imagens.size());
-
-		// Optional<Papel> papel = papelRepository.findById(1L);
-
-		// usuarioRepository.save(usuario);
-		// papelRepository.save();
-		// papelRepository.save(new Papel("Visitante"));
-
-		// System.out.println(u.get());
-
+		 ??? Por que a busca para o Usuario LAZY não executa ???
+		*/
+		imagensIterator.forEachRemaining(img -> System.out.println(img));
+		
 		context.close();
 	}
 }

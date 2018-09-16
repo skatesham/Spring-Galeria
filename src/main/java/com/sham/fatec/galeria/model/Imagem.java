@@ -29,20 +29,20 @@ public class Imagem {
 	@Column(name = "ima_id")
 	private long id;
 
-	@Column(name = "ima_nome")
+	@Column(name = "ima_nome", length = 50, nullable = false)
 	private String nome;
 
-	@Column(name = "ima_tamanho")
+	@Column(name = "ima_tamanho", length = 50, nullable = false)
 	private String tamanho;
 
-	@Column(name = "ima_tipo")
+	@Column(name = "ima_tipo", length = 20, nullable = false)
 	private String tipo;
 
-	@Column(name = "ima_imagem")
+	@Column(name = "ima_imagem", nullable = false)
 	private byte[] imagemBlob;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ima_id_usuario")
+	@JoinColumn(name = "ima_id_usuario", nullable = false)
 	private Usuario usuario;
 	
 	public Imagem() {
@@ -117,7 +117,7 @@ public class Imagem {
 	
 	@Override
 	public String toString() {
-		String str = String.format("Nome: %s, Tipo: %s", nome, tipo);
+		String str = String.format("Objeto Imagem - ID: %d Nome: %s / Tipo: %s Tamanho: %s /  Usuario: %s", id, nome, tipo, tamanho, usuario.getNome());
 		return str;
 	}
 

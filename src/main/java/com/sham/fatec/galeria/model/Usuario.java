@@ -95,7 +95,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		String str = String.format("Usuario: %d, Nome: %s, Email: %s", id, nome, email);
+		String str = String.format("Objeto Usuario - ID: %d / Nome: %s / Email: %s / usr: %s", id, nome, email, usuario);
 		return str;
 	}
 	
