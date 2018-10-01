@@ -63,7 +63,7 @@ public class App {
 		/*
 		 ??? Por que a busca para o Usuario LAZY não executa ???
 		*/
-		imagensIterator.forEachRemaining(img -> System.out.println(img));
+		//imagensIterator.forEachRemaining(img -> System.out.println(img));
 		
 		context.close();
 	}

@@ -24,11 +24,13 @@ public class ImagemServiceImpl implements ImagemService {
 	}
 
 	@Override
+	@Transactional
 	public Optional<Imagem> lerImagemById(long id) {
 		return imagemRepo.findById(id);
 	}
 
 	@Override
+	@Transactional
 	public Set<Imagem> lerImagensByUsuario(Usuario usuario) {		
 		return imagemRepo.findByUsuario(usuario);
 	}
