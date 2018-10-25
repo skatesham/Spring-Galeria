@@ -1,5 +1,5 @@
 # Spring-Galeria
-Galeria de Imagens com Spring and mysql
+Model da Galeria de Imagens com Spring and mysql
 
 Diagrama ER Banco de Dados
 
